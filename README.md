@@ -1,59 +1,59 @@
-# Fresco Logic FL2000 Linux/Android kernel driver
+# Driver de kernel Fresco Logic FL2000 Linux/Android
 
-### 1. What is this?
+### 1. O que é isso?
 
-This is an official driver release from Fresco Logic in an attempt to help the open-source community adopting the development and use of the FL2000DX device.
-This driver only covers the USB part of the display logic. It does not support the Linux desktop logic (eg. extended desktop vs mirrored desktop).
+Este é um lançamento oficial de driver da Fresco Logic em uma tentativa de ajudar a comunidade de código aberto a adotar o desenvolvimento e uso do dispositivo FL2000DX.
+Este driver cobre apenas a parte USB da lógica de exibição. Ele não oferece suporte à lógica de desktop Linux (por exemplo, desktop estendido versus desktop espelhado).
 
-### 2. On which kernel versions does this driver work?
+### 2. Em quais versões do kernel esse driver funciona?
 
-This driver is tested on Ubuntu 14 LTS as well as some Android platforms with kernel version 3.10.x.
-This driver source might not compile on newer kernels (eg. 4.0 or above) because of the fast-moving API changes in the
-mainstream kernel. You might need to adapt it for your own use.
+Este driver foi testado no Ubuntu 14 LTS, bem como em algumas plataformas Android com kernel versão 3.10.x.
+Esta fonte de driver pode não ser compilada em kernels mais recentes (por exemplo, 4.0 ou superior) devido às mudanças rápidas da API no
+kernel principal. Talvez seja necessário adaptá-lo para seu próprio uso.
 
-### 3. Target audience
+### 3. Público-alvo
 
-This release is targeted to open-source developers, as opposed to end-users.
+Esta versão é direcionada a desenvolvedores de código aberto, e não a usuários finais.
 
-### 4. How do I enable extended desktop/mirrored desktop on my X Window?
+### 4. Como habilito a área de trabalho estendida/área de trabalho espelhada em meu X Window?
 
-Currently Fresco Logic does not provide desktop related manipulation.
-Fresco Logic hopes the community will contribute to this area so that end-users can easily adopt this solution.
+Atualmente o Fresco Logic não fornece manipulação relacionada à área de trabalho.
+A Fresco Logic espera que a comunidade contribua nesta área para que os usuários finais possam adotar facilmente esta solução.
 
-### 5. FL2000DX limitation.
+### 5. Limitação do FL2000DX.
 
-The FL2000DX chip is cheap by design where it doesn't have a frame buffer on its own.
-It relies heavily on USB 3.0 transfer speed to accommodate continuous USB flow.
-The larger the image is, the heavier it depends on USB bandwidth.
-A typical 1920x1080@60 Hz requires 1920 * 1080 * 24bpp * 60 = 373,248,000 bytes/sec of traffic over the USB bus.
-As such, USB2.0 speed is not supported.
+O chip FL2000DX é barato por design, onde não possui um buffer de quadros próprio.
+Ele depende muito da velocidade de transferência do USB 3.0 para acomodar o fluxo USB contínuo.
+Quanto maior for a imagem, mais pesada ela depende da largura de banda USB.
+Um típico 1920x1080@60 Hz requer 1920 * 1080 * 24bpp * 60 = 373.248.000 bytes/s de tráfego no barramento USB.
+Como tal, a velocidade USB2.0 não é suportada.
 
-Connecting more than one FL2000DX device to the same bus is deprecated.
+A conexão de mais de um dispositivo FL2000DX ao mesmo barramento está obsoleta.
 
-### 6. How do I compile & test the kernel driver?
-#### 6a. Compile the driver
+### 6. Como compilar e testar o driver do kernel?
+#### 6a. Compilar o driver
 
-Find your kernel source tree, and edit `src/Makefile`. Locate the following line:
+Encontre a árvore fonte do seu kernel e edite `src/Makefile`. Localize a seguinte linha:
     
     KERNEL_PATH = /usr/src/linux-headers-4.4.0-72-generic`
     
-Modify this line so that it points to the correct source tree.
-After that, run `make` to create `fl2000.ko` and run `insmod fl2000.ko` to load the driver.
+Modifique esta linha para que aponte para a árvore de origem correta.
+Depois disso, execute `make` para criar `fl2000.ko` e execute `insmod fl2000.ko` para carregar o driver.
 
-#### 6b. Test the driver
+####6b. Teste o driver
 
-In the `sample` folder, run `make` to create `fltest`. If you you are using a
-cross compiler to build the binary for specific platforms, you need to specify that specific
-compiler in `src/Makefile`.
+Na pasta `sample`, execute `make` para criar `fltest`. Se você estiver usando um
+compilador cruzado para construir o binário para plataformas específicas, você precisa especificar esse específico
+compilador em `src/Makefile`.
     
-Run `./fltest 0` as superuser to run the test. The driver provides several
-user mode buffer access methods (e.g  copy to kernel internal buffer, or
-directly locking down user buffer). Look at `fl2000_ioctl.h` for detailed
-information.
+Execute `./fltest 0` como superusuário para executar o teste. O driver fornece vários
+métodos de acesso ao buffer no modo de usuário (por exemplo, copiar para o buffer interno do kernel ou
+bloqueando diretamente o buffer do usuário). Veja `fl2000_ioctl.h` para detalhes
+Informação.
 
-### 7. How do I file a bug to the Fresco Logic developers?
+### 7. Como faço para registrar um bug para os desenvolvedores do Fresco Logic?
 
-You can file bugs to [Github Issues](https://github.com/fresco-fl2000/fl2000/issues)
+Você pode registrar bugs em [Github Issues](https://github.com/fresco-fl2000/fl2000/issues)
 
 
 
